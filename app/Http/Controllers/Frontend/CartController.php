@@ -7,7 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentHistory;
 use App\Models\Product;
-use App\Models\Banner;
+use App\Models\Logo;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -68,7 +68,7 @@ class CartController extends Controller
             foreach ($params['product_id'] as $key => $productId) {
                 $carts [] = [$productId => $params['number'][$key]];
             }
-            $carts = \GuzzleHttp\json_encode($carts);
+            $carts = json_encode($carts);
             $order = Order::create([
                 'user_id' => auth()->id(),
                 'carts' => $carts,
@@ -80,6 +80,7 @@ class CartController extends Controller
             ]);
             // dd(auth()->user()['name'] . ' thanh toan MoMo', $order['id'], $order['total'], $order['id']);
             $momo = $this->paymentProcessMoMo(auth()->user()['name'] . ' thanh toan MoMo', $order['id'], $order['total'], $order['id']);
+            dd($momo);
             if (isset($momo['resultCode']) && $momo['resultCode'] === 0) {
                 DB::commit();
                 return redirect()->to($momo['payUrl'])->send();
@@ -163,12 +164,12 @@ class CartController extends Controller
     public function cart()
     {
         $cart = new Cart();
-        $banners = new Banner();
+        $logos = new Logo();
 
         $listCart = $cart->getCartByUserId(auth()->id());
-        $banner = $banners->getBanner();
+        $logo = $logos->getLogo();
         return view('frontend.shoping-cart')->with(['listCart' => $listCart,
-                                                    'banner' => $banner]);
+                                                    'logo' => $logos]);
     }
 
     public function addCart(Request $request, Product $productInfo)

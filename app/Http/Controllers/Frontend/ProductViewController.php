@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Banner;
+use App\Models\Logo;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Gallery;
@@ -16,7 +16,7 @@ class ProductViewController extends Controller
         $this->category = new Category();
         $this->product = new Product();
         $this->gallery = new Gallery();
-        $this->banners = new Banner();
+        $this->logos = new Logo();
     }
 
     public function viewProduct()
@@ -26,7 +26,7 @@ class ProductViewController extends Controller
         $cate[] = $this->category->getCategory();
         $product = $this->product->getProduct();
         $sale = $this->product->getSaleProduct();
-        $banner = $this->banners->getBanner();
+        $logo = $this->logos->getLogo();
 
         $array = [];
 
@@ -44,7 +44,7 @@ class ProductViewController extends Controller
                                                 'product' => $product,
                                                 'title' => $title,
                                                 'sale' => $array,
-                                                'banner' => $banner
+                                                'logo' => $logo
                                                ]);
     }
 
@@ -53,7 +53,7 @@ class ProductViewController extends Controller
         $result = $this->product->getDetailProduct($slug);
         $product_id = $result->id; // get product id
         $getGallery = $this->gallery->getGalleryByProductId($product_id);
-        $banner = $this->banners->getBanner();
-        return view('frontend.product-detail', compact('result', 'getGallery', 'banner'));
+        $logo = $this->logos->getBanner();
+        return view('frontend.product-detail', compact('result', 'getGallery', 'logo'));
     }
 }
