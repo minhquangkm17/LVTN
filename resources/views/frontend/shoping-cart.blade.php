@@ -133,16 +133,16 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="shoping__checkout">
-                            <h5>Cart Total</h5>
+                            <h5>Thanh toán</h5>
                             <ul>
-                                <li>Subtotal <span>${{ number_format($totalAmount ?? 0, 0, ',', '.') }}</span></li>
-                                <li>Total <span>${{ number_format($total ?? 0, 0, ',', '.') }}</span></li>
+                                <li>Giá gốc <span>{{ number_format($totalAmount ?? 0, 0, ',', '.') }}VND</span></li>
+                                <li>Thành tiền <span>{{ number_format($total ?? 0, 0, ',', '.') }}VND</span></li>
                                 <input type="hidden" name="total" id="total" value="{{ $total }}">
                                 <input type="hidden" name="amount" id="total" value="{{ $totalAmount }}">
                             </ul>
                             <div class="d-flex justify-between" style="justify-content: space-around;">
-                                <input type="submit" name="momo" class="btn-info mr-3 col-6" value="Payment MoMo" />
-                                <input type="submit" name="money" class="primary-btn col-6" value="Payment Crash" />
+                                <input type="submit" name="momo" class="btn-info mr-3 col-6" value="Thanh toán Momo" />
+                                <input type="submit" name="money" class="primary-btn col-6" value="Đặt hàng COD" />
                             </div>
                         </div>
                     </div>
