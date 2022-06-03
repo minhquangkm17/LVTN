@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Banner;
+use App\Models\Logo;
 use App\Models\Blog;
 
 class BlogViewController extends Controller
@@ -12,14 +12,14 @@ class BlogViewController extends Controller
      public function __construct()
     {
         $this->blogs = new Blog();
-        $this->banners = new Banner();
+        $this->logos = new Logo();
     }
 
     public function blog()
     {
         $result[] = $this->blogs->getPost();
-        $banner = $this->banners->getBanner();
-        return view('frontend.blog', compact('banner', 'result'));
+        $logo = $this->logos->getLogo();
+        return view('frontend.blog', compact('logo', 'result'));
     }
 
     public function detail($slug)
@@ -29,8 +29,8 @@ class BlogViewController extends Controller
         $title = $result->post_seo_title;
         $keywords = $result->post_seo_keyword;
         $description = $result->post_seo_desc;
-        $banner = $this->banners->getBanner();
+        $logo = $this->logos->getLogo();
 
-        return view('frontend.blog-detail', compact('result', 'title', 'keywords', 'description', 'banner'));
+        return view('frontend.blog-detail', compact('result', 'title', 'keywords', 'description', 'logo'));
     }
 }

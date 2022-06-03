@@ -5,7 +5,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="footer__about">
                             <div class="footer__about__logo">
-                                <a href="#"><img src="public/img/logo.png" alt=""></a>
+                                <a href="#"><img style="height: 100px; width:120px; object-fit: cover;" src="{{ asset($logo->url) }}" alt=""></a>
                             </div>
                             <ul>
                                 <li>Address: 60-49 Road 11378 New York</li>

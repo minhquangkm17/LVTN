@@ -19,7 +19,7 @@
     <div class="container">
         <hr>
         <div class="content">
-            {!! $result->post_content !!}
+            {!! $intro->post_content !!}
         </div>
     </div>
 @endsection

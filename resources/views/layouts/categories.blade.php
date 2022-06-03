@@ -9,12 +9,8 @@
                             <span>Danh mục</span>
                         </div>
                         <ul>
-                            @foreach ($cate as $key => $result)
-                                @foreach ($result as $key2 => $value)
-                                @if ($value->stats == 1)
-                                    <li class="menu_categories"><a class="menu_categories" href="#">{{$value->category_name}}</a></li>
-                                @endif
-                                @endforeach
+                            @foreach ($cate as $key => $value)
+                                <li class="menu_categories"><a class="menu_categories" href="#">{{$value->category_name}}</a></li>
                             @endforeach
                         </ul>
                     </div>

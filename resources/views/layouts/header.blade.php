@@ -3,7 +3,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="{{'/trang-chu'}}"><img src="{{asset('public/img/logo.png')}}" alt=""></a>
+            <a href="{{'/trang-chu'}}"><img src="{{asset($logo->url)}}" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -97,7 +97,7 @@
                                     <a href="#"><i class="fa fa-pinterest-p"></i></a>
                                 </div>
                                 <div class="header__top__right__language">
-                                    <img src="public/img/vietnam.png" alt="">
+                                    <img src="{{asset('public/img/vietnam.png')}}" alt="">
                                     <div>Việt Nam</div>
                                     <span class="arrow_carrot-down"></span>
                                     <ul>
@@ -140,7 +140,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="header__logo">
-                            <a href="{{ asset('/trang-chu') }}"><img src="{{ asset('public/img/logo.png') }}"
+                            <a href="{{ asset('/trang-chu') }}"><img style="height: 50px; width:120px; object-fit: cover;"src="{{ asset($logo->url) }}"
                                     alt=""></a>
                         </div>
                     </div>

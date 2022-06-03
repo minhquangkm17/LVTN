@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 //login auth laravel
 require __DIR__ . '/auth.php';
 
-// trasng
+// index
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/trang-chu', [HomeController::class, 'home']);
 
@@ -135,6 +135,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('edit-intro', [StaticPageController::class, 'intro'])->name('editIntro');
         Route::post('post-edit-intro', [StaticPageController::class, 'postEditIntro'])->name('postedit');
         Route::get('edit-img', [StaticPageController::class, 'img'])->name('editImg');
+        Route::post('post-logo', [StaticPageController::class, 'postEditLogo'])->name('postEditLogo');
     });
 
 

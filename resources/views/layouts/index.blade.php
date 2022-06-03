@@ -27,21 +27,21 @@
             <div class="row featured__filter">
                 @foreach ($product as $product)
                     @if ($product->discount = 0 || $product->discount == null)
-                    <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                        <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->product_img)}}">
-                                <ul class="featured__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="featured__item__text">
-                                <h6><a href="#">{{ $product->product_name }}</a></h6>
-                                <h5>{{ number_format($product->product_price)}} VND</h5>
+                        <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <div class="featured__item">
+                                <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->product_img) }}">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="#">{{ $product->product_name }}</a></h6>
+                                    <h5>{{ number_format($product->product_price) }} VND</h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endif
                 @endforeach
             </div>

@@ -86,7 +86,7 @@
                             <span>Quản lý trang</span>
                         </a>
                         <ul class="sub">
-                            <li><a href="">Quản lý hình ảnh</a></li>
+                            <li><a href="{{ route('admin.static.editImg')}}">Quản lý hình ảnh</a></li>
                             <li><a href="{{ route('admin.static.editIntro')}}">Giới Thiệu</a></li>
                             <li><a href="">Thông tin liên lạc</a></li>
                         </ul>

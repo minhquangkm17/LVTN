@@ -139,6 +139,8 @@ class ProductController extends Controller
 
         $get_img = $request->file(['product_img']);
 
+        dd($get_img);
+
         $name_img = $get_img->getClientOriginalName(); // get original name img
         $get_name_img = current(explode('.',$name_img)); // get name img and stranform to string
         $name_images = $get_name_img.rand(0,99).'.'.$get_img->getClientOriginalExtension(); // insert extendsion into name_img

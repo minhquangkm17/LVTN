@@ -6,13 +6,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Introduce;
 use Illuminate\Support\Facades\DB;
+use App\Models\Logo;
 
 class StaticPageController extends Controller
 {
     public function __construct()
     {
         $this->intro = new Introduce();
+        $this->logos = new Logo();
 
+    }
+
+    public function authLogin()
+    {
+        $id = Session()->get('id');
+        if($id == null)
+        { 
+            return redirect('/admin/login')->send();
+        }
     }
 
      public function intro()
@@ -38,7 +49,34 @@ class StaticPageController extends Controller
 
     public function img ()
     {
-       
-        return view('admin.static-page.edit-img');
+        $logo = $this->logos->getLogo();
+        return view('admin.static-page.edit-img', compact('logo'));
+    }
+
+    public function postEditLogo(Request $request)
+    {
+        $this->authLogin();
+        $request->validate([
+            'url' =>'image|required|max:10000',
+        ],[
+            'url.image' => 'Dữ liệu không phải dạng ảnh',
+            'url.required' => 'Hãy chèn ảnh sản phẩm',
+            'url.max' => 'Ảnh tối đa 10Mb',
+        ]);
+
+        $get_img = $request->file(['url']);
+
+        $name_img = $get_img->getClientOriginalName(); // get original name img
+        $get_name_img = current(explode('.',$name_img)); // get name img and stranform to string
+        $name_images = $get_name_img.rand(0,99).'.'.$get_img->getClientOriginalExtension(); // insert extendsion into name_img
+        $get_img->move(public_path('uploads/logo/'),$name_images); // move img to public/uploads
+        $url_img = 'public/uploads/logo/'.''. $name_images; // get url img to insert data
+
+        // transmit input data to $data
+        $logo = DB::table('logos')
+            ->where('id', 1)
+            ->update(['url' => $url_img]);
+
+        return back();
     }
 }
