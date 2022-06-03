@@ -38,6 +38,7 @@ class StaticPageController extends Controller
 
     public function img ()
     {
+       
         return view('admin.static-page.edit-img');
     }
 }

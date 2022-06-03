@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use App\Models\Introduce;
 
@@ -10,9 +11,11 @@ class IntroduceController extends Controller
 {
     public function introduce()
     {
-        $this->intro = new Introduce();
+        $introduce = new Introduce();
+        $banners = new Banner();
 
-        $result = $this->intro->getIntro();
-        return view('frontend.introduce')->with(['result' => $result]);
+        $intro = $introduce->getIntro();
+        $banner = $banners->getBanner();
+        return view('frontend.introduce', compact('banner', 'intro'));
     }
 }

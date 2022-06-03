@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('introduces', function (Blueprint $table) {
-             $table->increments('id');
+            $table->increments('id');
             $table->text('post_content');
             $table->string('post_seo_title');
             $table->string('post_seo_desc');

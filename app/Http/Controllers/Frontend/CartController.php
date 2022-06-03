@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentHistory;
 use App\Models\Product;
+use App\Models\Banner;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -162,8 +163,12 @@ class CartController extends Controller
     public function cart()
     {
         $cart = new Cart();
+        $banners = new Banner();
+
         $listCart = $cart->getCartByUserId(auth()->id());
-        return view('frontend.shoping-cart')->with(['listCart' => $listCart]);
+        $banner = $banners->getBanner();
+        return view('frontend.shoping-cart')->with(['listCart' => $listCart,
+                                                    'banner' => $banner]);
     }
 
     public function addCart(Request $request, Product $productInfo)
