@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('public/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('public/css/style.css') }}" type="text/css">
+    
 </head>
 
 <body>
@@ -61,6 +62,7 @@
     <script src="{{ asset('public/js/main.js') }}"></script>
     <script src="{{ asset('public/js/main.js') }}"></script>
     <script src="{{ asset('public/js/common.js') }}"></script>
+
     @stack('scripts')
 
 </body>

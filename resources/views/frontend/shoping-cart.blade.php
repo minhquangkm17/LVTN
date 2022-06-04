@@ -2,15 +2,14 @@
 @extends('layouts.header')
 @extends('layouts.footer')
 @section('content')
-    <section class="breadcrumb-section set-bg" data-setbg="{{ asset('public/img/blog/blog.jpg') }}">
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg" data-setbg="{{ asset('/public/img/blog/blog.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>GIỎ HÀNG</h2>
+                        <h2 font-family="tahoma">GIỎ HÀNG</h2>
                         <div class="breadcrumb__option">
-                            <a href="{{ asset('trang-chu') }}">Trang chủ</a>
-                            <span>Giỏ hàng</span>
                         </div>
                     </div>
                 </div>
@@ -64,14 +63,10 @@
                                                 <td class="shoping__cart__price">{{ $cart->product['discount'] }}%</td>
                                                 <td class="shoping__cart__quantity">
                                                     <div class="button">
-                                                        <button type="button" class="icon_close"
-                                                            data-url="{{ route('cart.removeCart') }}"
-                                                            data-id="{{ $cart->product['id'] }}">-
-                                                        </button>
-                                                        {{-- <button class="icon_close"
+                                                        <button class="icon_close"
                                                             data-id="{{ $cart->product['id'] }}"
                                                             data-url="{{ route('cart.removeCart') }}"><i
-                                                                class="fa-solid fa-minus"></i></button> --}}
+                                                                class="fa-solid fa-minus"></i></button>
                                                         <input type="hidden" name="product_id[]"
                                                             value="{{ $cart->product['id'] }}">
                                                         <label>
@@ -106,8 +101,8 @@
                 <div class="row d-flex justify-content-end">
                     <label for="address" class="form-control-label">Địa chỉ nhận hàng</label>
                     <br />
-                    <textarea class="form-control" type="text" name="address" id="address" rows="3">
-                    {{ auth()->user()->user_detail['address']}}</textarea>
+                    <textarea class ="form-control" type="text" name="address" id="address" rows="3">
+                    {!! auth()->user()->user_detail['address'] !!}</textarea>
                 </div>
                 <div class="row d-flex justify-content-end">
                     <label for="note" class="form-text">Ghi chú</label>
@@ -142,7 +137,7 @@
                             </ul>
                             <div class="d-flex justify-between" style="justify-content: space-around;">
                                 <input type="submit" name="momo" class="btn-info mr-3 col-6" value="Thanh toán Momo" />
-                                <input type="submit" name="money" class="primary-btn col-6" value="Đặt hàng COD" />
+                                <input type="submit" name="money" class="primary-btn col-6" value="Đặt hàng" />
                             </div>
                         </div>
                     </div>

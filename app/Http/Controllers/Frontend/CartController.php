@@ -54,15 +54,12 @@ class CartController extends Controller
             return redirect()->route('cart.shoppingcart')->send()->with(['message' => $params['message']]);
         } catch (Exception $exception) {
             DB::rollBack();
-            
-            dd($exception->getMessage());
             abort(500);
         }
     }
 
     public function paymentMomo($params)
     {
-        dddd;
         try {
             DB::beginTransaction();
             $carts = [];
@@ -81,7 +78,7 @@ class CartController extends Controller
             ]);
             // dd(auth()->user()['name'] . ' thanh toan MoMo', $order['id'], $order['total'], $order['id']);
             $momo = $this->paymentProcessMoMo(auth()->user()['name'] . ' thanh toan MoMo', $order['id'], $order['total'], $order['id']);
-            dd($momo);
+            // dd($momo);
             if (isset($momo['resultCode']) && $momo['resultCode'] === 0) {
                 DB::commit();
                 return redirect()->to($momo['payUrl'])->send();
@@ -127,7 +124,7 @@ class CartController extends Controller
 
         } catch (Exception $exception) {
             DB::rollBack();
-            dd($exception->getMessage());
+            // dd($exception->getMessage());
             abort(500);
         }
     }
@@ -189,7 +186,7 @@ class CartController extends Controller
             }
             DB::commit();
             return response()->json([
-                'message' => 'Add production successfully',
+                'message' => 'Thêm sản phẩm thành công',
             ], 200);
         } catch (Exception $exception) {
             DB::rollBack();
@@ -211,12 +208,17 @@ class CartController extends Controller
                 return response()->json(['Product Not Exist In Cart'], 404);
             }
             DB::beginTransaction();
-            $number = $cartInfo['number'] - 1;
-            if ($number <= 0) {
-                $cartInfo->forceDelete();
+            $number = $cartInfo['number'];
+            if ($number == 1) {
+                // $cartInfo->forceDelete();
+                return response()->json([
+                'message' => 'Số lượng không thể nhỏ hơn 1',
+            ], 200);
             } else {
+                $number -= 1;
                 $update = $cartInfo->update(
                     [
+                       
                         'number' => $number,
                     ]
                 );

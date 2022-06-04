@@ -3517,3 +3517,7 @@ img .header__logo .logo {
 	height: 50px;
 	object-fit: center;
 }
+
+h4.user_info {
+	text-align: center;
+}

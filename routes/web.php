@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\StaticPageController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\ProductViewController;
+use App\Http\Controllers\Frontend\UserDetailController;
 use App\Http\Controllers\Frontend\BlogViewController;
 use App\Http\Controllers\Frontend\IntroduceController;
 use Illuminate\Support\Facades\Route;
@@ -31,13 +32,12 @@ require __DIR__ . '/auth.php';
 
 // index
 Route::get('/', [HomeController::class, 'home']);
-Route::get('/trang-chu', [HomeController::class, 'home']);
+Route::get('/trang-chu', [HomeController::class, 'home'])->name('index');
 
-//front-end
 //cart
 Route::prefix('/gio-hang')->name('cart.')->group(function () {
     Route::get('/number', [CartController::class, 'number'])->name('number')->middleware(['auth']);
-    Route::get('/', [CartController::class, 'cart'])->middleware(['auth'])->name('shoppingcart'); //check login;
+    Route::get('/', [CartController::class, 'cart'])->middleware(['auth'])->name('shoppingcart'); 
     Route::get('/add-cart/{productInfo}', [CartController::class, 'addCart'])->middleware(['auth'])->name('addCart');
     Route::post('/remove-cart', [CartController::class, 'removeCart'])->middleware(['auth'])->name('removeCart');
     Route::get('/del-cart-item/{cartInfor}', [CartController::class, 'delItem'])->middleware(['auth'])->name('delItem');
@@ -68,6 +68,14 @@ Route::prefix('/tin-tuc')->name('blog.')->group(function () {
 
 //introduce
 Route::get('/gioi-thieu', [IntroduceController::class, 'introduce'])->name('intro');
+
+// user
+Route::prefix('/user')->name('user.')->group(function () {
+    Route::get('/user-detail', [UserDetailController::class, 'userDetail'])->name('userDetail')->middleware(['auth']);
+    Route::post('/edit-user-detail/{userInfo}', [UserDetailController::class, 'editUserDetail'])->name('editUserDetail.')->middleware(['auth']);
+
+});
+
 
 //admin
 Route::prefix('/admin')->name('admin.')->group(function () {

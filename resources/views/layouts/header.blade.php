@@ -8,7 +8,7 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="{{ asset('sp-yeu-thich') }}"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="{{ asset('gio-hang') }}"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="{{ asset('gio-hang') }}"><i class="fa fa-shopping-bag"></i> <span class="number_cart"></span></a></li>
             </ul>
             {{-- <div class="header__cart__price">item: <span>$150.00</span></div> --}}
         </div>
@@ -107,9 +107,10 @@
                                 @php
                                     if (Auth::check()) {
                                         $user = Auth::user()->name;
+                                        $user_id = Auth::user()->id;
                                         $my_var =
                                             "<div class=\"header__top__right__language\">
-                                                        <a class=\"header__top__right\">
+                                                        <a class=\"header__top__right\" href=\"http://localhost/jkshop/user/user-detail\">
                                                         <i class=\"fa-solid fa-user-check\"></i>" .
                                             $user .
                                             "</a>
@@ -161,7 +162,7 @@
                         <ul>
                             <li><a href=""><i class="fa fa-heart"></i> <span>1</span></a></li>
                             <li><a href="{{asset('gio-hang')}}"><i class="fa fa-shopping-bag"></i> <span
-                                        id="number_cart"></span></a></li>
+                                        class="number_cart"></span></a></li>
                         </ul>
                         {{-- <div class="header__cart__price">item: <span></span></div> --}}
                     </div>
@@ -178,10 +179,11 @@
         </div>
     </header>
 @endsection
+
 @push('scripts')
     <script !src="">
         $(document).ready(function () {
-            const html = $("#number_cart");
+            const html = $(".number_cart");
             const url = "{{route('cart.number')}}";
             $.ajaxSetup({
                 headers: {
