@@ -7,9 +7,9 @@
         <div class="row">
             <div class="col-md-3 ">
                 <div class="list-group ">
-                    <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
-                    <a href="#" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
-                    <a href="#" class="list-group-item list-group-item-action">Đổi mật khẩu</a>
+                    <span class="list-group-item list-group-item-action active">Dashboard</span>
+                    <a href="{{ route('user.userDetail')}}" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
+                    <a href="{{ route('user.editUserPassword')}}" class="list-group-item list-group-item-action">Đổi mật khẩu</a>
                     <a href="#" class="list-group-item list-group-item-action">Quản lý đơn hàng</a>
                     <a href="#" class="list-group-item list-group-item-action">Sản phẩm yêu thích</a>
                 </div>
@@ -31,7 +31,7 @@
                                 @if (session('msg'))
                                     <div class="alert alert-success">{{ session('msg') }}</div>
                                 @endif
-                                <form role="form" action="{{ URL::to('user/edit-user-detail/' . $userInfo . '') }}"
+                                <form role="form" action="{{ URL::to('user/post-edit-password/' . $userInfo . '') }}"
                                     method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <input type="hidden" value="{{ auth()->user()->id }}">
@@ -45,44 +45,27 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="username" class="col-4 col-form-label">Tên người dùng*</label>
+                                        <label for="username" class="col-4 col-form-label">Mật khẩu cũ*</label>
                                         <div class="col-8">
-                                            <input id="name" value="{{ auth()->user()->name }}" name="name"
-                                                placeholder="Tên người dùng" class="form-control here" required="required"
-                                                type="text">
+                                            <input id="old_password" value="" name="old_password"
+                                                placeholder="Nhập mật khẩu" class="form-control here" required="required"
+                                                type="password">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
+                                        <label for="new_password" class="col-4 col-form-label">Nhập mật khẩu mới*</label>
                                         <div class="col-8">
-                                            @error('full_name')
-                                                <span style="color:red">{{ $message }}</span>
-                                            @enderror
+                                            <input id="new_password" value=""
+                                                name="new_password" placeholder="Mật khẩu mới" class="form-control here"
+                                                type="password">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="name" class="col-4 col-form-label">Họ và tên</label>
+                                        <label for="new_password" class="col-4 col-form-label">Xác nhận mật khẩu*</label>
                                         <div class="col-8">
-                                            <input id="full_name" value="{{ auth()->user()->user_detail['full_name'] }}"
-                                                name="full_name" placeholder="Họ và tên" class="form-control here"
-                                                type="text">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
-                                        <div class="col-8">
-                                            @error('email')
-                                                <span style="color:red">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="email" class="col-4 col-form-label">Email*</label>
-                                        <div class="col-8">
-                                            <input id="email" value="{{ auth()->user()->email }}" name="email"
-                                                placeholder="Email" class="form-control here" required="required"
-                                                type="text">
+                                            <input id="confirm_password" value="" name="confirm_password"
+                                                placeholder="Xác nhận mật khẩu" class="form-control here" required="required"
+                                                type="password">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -102,4 +85,21 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+                window.onload = function() {
+                    document.getElementById("new_password").onchange = validatePassword;
+                    document.getElementById("confirm_password").onchange = validatePassword;
+                }
+
+                function validatePassword() {
+                    var pass2 = document.getElementById("confirm_password").value;
+                    var pass1 = document.getElementById("new_password").value;
+                    if (pass1 != pass2)
+                        document.getElementById("confirm_password").setCustomValidity("Passwords Don't Match");
+                    else
+                        document.getElementById("confirm_password").setCustomValidity('');
+                    //empty string means no validation error
+                }
+            </script>
 @endsection
