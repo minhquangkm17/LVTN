@@ -9,7 +9,6 @@ use App\Models\UserDetail;
 use App\Models\Logo;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserDetailController extends Controller
 {
@@ -30,7 +29,7 @@ class UserDetailController extends Controller
         $password = $request->password;
         $email = $this->users->getUserByUserId($userInfo)->email;
         $verifyPassword = Auth::attempt(['email' => $email, 'password' => $password]);
-
+        
         if($verifyPassword == true)
         {
             DB::table('users')
@@ -50,32 +49,6 @@ class UserDetailController extends Controller
                 ]);
 
             return back();
-        } else { 
-            return redirect()->route('index')->send();
-        }
-    }
-
-    public function editUserPassword()
-    {
-        $logo = $this->logos->getLogo();
-        return view('frontend.user.change-password', compact('logo'));
-    }
-
-    public function postEditUserPassword(Request $request, $userInfo)
-    {
-        
-        $password = $request->old_password;
-        $email = $this->users->getUserByUserId($userInfo)->email;
-        $verifyPassword = Auth::attempt(['email' => $email, 'password' => $password]);
-
-        if($verifyPassword == true)
-        {
-            $update = DB::table('users')
-            ->where('id', $userInfo)
-            ->update([
-                    'password' => bcrypt($request->password),
-                ]);
-            return redirect()->route('user.userDetail');
         } else { 
             return redirect()->route('index')->send();
         }

@@ -67,7 +67,7 @@
                 <input type="submit" class="register" value="Đăng kí">
             </form>
 
-            {{-- <script type="text/javascript">
+            <script type="text/javascript">
                 window.onload = function() {
                     document.getElementById("password1").onchange = validatePassword;
                     document.getElementById("password2").onchange = validatePassword;
@@ -82,7 +82,7 @@
                         document.getElementById("password2").setCustomValidity('');
                     //empty string means no validation error
                 }
-            </script> --}}
+            </script>
             <p class="wthree w3l">Đăng kí bằng các tài khoản khác</p>
             <ul class="social-agileinfo wthree2">
                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>

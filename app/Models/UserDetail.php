@@ -20,7 +20,6 @@ class UserDetail extends Model
     public function getUserByUserId($userInfo)
     {
         return DB::table($this->table)
-        ->where('user_id', $userInfo)
         ->join('users', 'user_detail.user_id', '=', 'users.id')
         ->select('user_detail.*', 'users.*')
         ->first();
