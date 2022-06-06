@@ -195,7 +195,7 @@
                                                 </div>
                                                 <ul class="product__item__pic__hover">
                                                     <li>
-                                                        <button onclick="location.href=''" class="csw-btn-button"><i
+                                                        <button onclick="location.href='{{ asset('user/add-favorite-product/'.''.$sale_value->product->id) }}'" class="csw-btn-button"><i
                                                                 class="fa fa-heart"></i></button>
                                                     </li>
                                                     <li>

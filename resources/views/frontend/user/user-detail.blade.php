@@ -7,11 +7,11 @@
         <div class="row">
             <div class="col-md-3 ">
                 <div class="list-group ">
-                    <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
-                    <a href="#" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
+                     <span class="list-group-item list-group-item-action active">Dashboard</span>
+                    <a href="{{route('user.userDetail')}}" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
                     <a href="#" class="list-group-item list-group-item-action">Đổi mật khẩu</a>
                     <a href="#" class="list-group-item list-group-item-action">Quản lý đơn hàng</a>
-                    <a href="#" class="list-group-item list-group-item-action">Sản phẩm yêu thích</a>
+                    <a href="{{ route('user.favoriteProduct')}}" class="list-group-item list-group-item-action">Sản phẩm yêu thích</a>
                 </div>
             </div>
             <div class="col-md-9">

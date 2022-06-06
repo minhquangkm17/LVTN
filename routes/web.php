@@ -73,7 +73,9 @@ Route::get('/gioi-thieu', [IntroduceController::class, 'introduce'])->name('intr
 Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/user-detail', [UserDetailController::class, 'userDetail'])->name('userDetail')->middleware(['auth']);
     Route::post('/edit-user-detail/{userInfo}', [UserDetailController::class, 'editUserDetail'])->name('editUserDetail.')->middleware(['auth']);
-
+    Route::get('/favorite-product', [UserDetailController::class, 'favoriteProduct'])->name('favoriteProduct')->middleware(['auth']);
+    Route::get('/add-favorite-product/{productInfo}', [UserDetailController::class, 'addFavoriteProduct'])->name('addFavoriteProduct')->middleware(['auth']);
+    Route::get('/del-favorite-product/{productInfo}', [UserDetailController::class, 'delFavoriteProduct'])->name('delFavoriteProduct')->middleware(['auth']);
 });
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\FavoriteProduct;
 use App\Models\UserDetail;
 use App\Models\Logo;
 use App\Http\Requests\UserRequest;
@@ -16,6 +17,7 @@ class UserDetailController extends Controller
     {
         $this->users = new UserDetail();
         $this->logos = new Logo();
+        $this->favorite = new FavoriteProduct();
     }
 
     public function userDetail()
@@ -52,6 +54,31 @@ class UserDetailController extends Controller
         } else { 
             return redirect()->route('index')->send();
         }
+    }
+
+    public function favoriteProduct ()
+    {
+        $logo = $this->logos->getLogo();
+        $list = $this->favorite->getFavoriteProduct();
+        return view('frontend.user.favorite-product', compact('logo', 'list'));
+    }
+
+    public function addFavoriteProduct(Request $request, $productInfo)
+    {
+        DB::table('favorite_products')
+        ->insert([
+            'product_id' => $productInfo,
+            'user_id' => auth()->id(),
+            'created_at' => time(),
+        ]);
+
+        return back();
+    }
+
+    public function delFavoriteProduct($productInfo)
+    {
+        $this->favorite->delFavoriteProduct($productInfo);
+        return back();
     }
 }
 

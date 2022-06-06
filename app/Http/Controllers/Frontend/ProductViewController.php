@@ -53,7 +53,7 @@ class ProductViewController extends Controller
         $result = $this->product->getDetailProduct($slug);
         $product_id = $result->id; // get product id
         $getGallery = $this->gallery->getGalleryByProductId($product_id);
-        $logo = $this->logos->getBanner();
+        $logo = $this->logos->getLogo();
         return view('frontend.product-detail', compact('result', 'getGallery', 'logo'));
     }
 }
