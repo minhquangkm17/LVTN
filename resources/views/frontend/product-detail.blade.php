@@ -59,8 +59,17 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">ADD TO CARD</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <button class="add-cart" data-url="{{route('cart.addCart',$result->id)}}">
+                            <i class="fa fa-shopping-cart"></i>
+                        </button>
+                        @php
+                        if($check == null){
+                            echo "<a href=\"http://localhost/jkshop/user/add-favorite-product/$result->id\" class=\"heart-icon\"><i class=\"fa fa-heart\"></i></a>";
+                        }
+                        if($check != null){
+                            echo "<a href=\"http://localhost/jkshop/user/del-favorite-product/$result->id\" class=\"heart-icon\"><i style=\"color:red\" class=\"fa fa-heart\"></i></a>";
+                        }
+                        @endphp
                         <ul>
                             <li><b>Số lượng</b> <span>15</span></li>
                             <li><b>Share on</b>
@@ -200,3 +209,12 @@
     </section>
     <!-- Related Product Section End -->
 @endsection
+
+@push('scripts')
+    <script !src="">
+        $(document).ready(function () {
+            ajaxAddCart();
+        });
+    </script>
+@endpush
+

@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero__item set-bg" data-setbg="{{asset('public/img/hero/banner.jpg')}}">
+                    <div class="hero__item set-bg" data-setbg="{{ asset('public/img/hero/banner.jpg') }}">
                     </div>
                 </div>
             </div>
@@ -42,8 +42,7 @@
                         <div class="sidebar__item">
                             <h4>Price</h4>
                             <div class="price-range-wrap">
-                                <div
-                                    class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                     data-min="10" data-max="540">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                     <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -189,26 +188,34 @@
                                     <div class="col-lg-4">
                                         <div class="product__discount__item">
                                             <div class="product__discount__item__pic set-bg"
-                                                 data-setbg="{{ asset($sale_value->product->product_img) }}">
+                                                data-setbg="{{ asset($sale_value->product->product_img) }}">
                                                 <div class="product__discount__percent">
                                                     -{{ $sale_value->product->discount }}
                                                 </div>
                                                 <ul class="product__item__pic__hover">
                                                     <li>
-                                                        <button onclick="location.href='{{ asset('user/add-favorite-product/'.''.$sale_value->product->id) }}'" class="csw-btn-button"><i
-                                                                class="fa fa-heart"></i></button>
+                                                        @php
+                                                        $productInfo = $sale_value->product->id;
+                                                            if ($sale_value->checkFavorite == null) {
+                                                                
+                                                                echo "<button onclick=\"location.href=\"http://localhost/jkshop/user/add-favorite-product/$productInfo\"\"
+                                                            class=\"csw-btn-button\"><i
+                                                                class=\"fa fa-heart\"></i></button>";
+                                                            }
+                                                            if ($sale_value->checkFavorite != null) {
+                                                                echo "<a href=\"http://localhost/jkshop/user/del-favorite-product/$productInfo\" class=\"heart-icon\"><i style=\"color:red\" class=\"fa fa-heart\"></i></a>";
+                                                            }
+                                                        @endphp
                                                     </li>
                                                     <li>
-                                                        <button
-                                                            onclick="location.href='{{ asset('san-pham/'.''.$sale_value->slug) }}'"
+                                                        <button onclick="location.href='{{ asset('san-pham/' . '' . $sale_value->slug) }}'"
                                                             class="csw-btn-button"><i
                                                                 class="fa-solid fa-magnifying-glass"></i></button>
                                                     </li>
                                                     <li>
                                                         <button class="add-cart"
-                                                                data-url="{{route('cart.addCart',$sale_value->product->id)}}">
-                                                            <i
-                                                                class="fa fa-shopping-cart"></i></button>
+                                                            data-url="{{ route('cart.addCart', $sale_value->product->id) }}">
+                                                            <i class="fa fa-shopping-cart"></i></button>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -259,20 +266,22 @@
                         @foreach ($product as $key => $value)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg"
-                                         data-setbg="{{ asset($value->product_img) }}">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ asset($value->product_img) }}">
                                         <ul class="product__item__pic__hover">
                                             <li>
-                                                <button><i class="fa fa-heart"></i></button>
+                                                <button
+                                                    onclick="location.href='{{ asset('user/add-favorite-product/' . '' . $sale_value->product->id) }}'"
+                                                    class="csw-btn-button"><i class="fa fa-heart"></i></button>
+
                                             </li>
                                             <li>
                                                 <button
-                                                    onclick="location.href='{{ asset('san-pham/'.''.$value->product_slug) }}'">
-                                                    <i
-                                                        class="fa-solid fa-magnifying-glass"></i></button>
+                                                    onclick="location.href='{{ asset('san-pham/' . '' . $value->product_slug) }}'">
+                                                    <i class="fa-solid fa-magnifying-glass"></i></button>
                                             </li>
                                             <li>
-                                                <button class="add-cart" data-url="{{route('cart.addCart',$value->id)}}"><i
+                                                <button class="add-cart"
+                                                    data-url="{{ route('cart.addCart', $value->id) }}"><i
                                                         class="fa fa-shopping-cart"></i></button>
                                             </li>
                                         </ul>
@@ -300,7 +309,7 @@
 
 @push('scripts')
     <script !src="">
-        $(document).ready(function () {
+        $(document).ready(function() {
             ajaxAddCart();
         });
     </script>

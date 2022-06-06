@@ -28,4 +28,12 @@ class FavoriteProduct extends Model
         ->where('product_id', $productInfo)
         ->delete();
     }
+
+    public function check($productInfo)
+    {
+        return DB::table($this->table)
+        ->where('product_id', $productInfo)
+        ->where('user_id', auth()->id())
+        ->first();
+    }
 }

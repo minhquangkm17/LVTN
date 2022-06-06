@@ -3,12 +3,13 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="{{'/trang-chu'}}"><img src="{{asset($logo->url)}}" alt=""></a>
+            <a href="{{ '/trang-chu' }}"><img src="{{ asset($logo->url) }}" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="{{ asset('sp-yeu-thich') }}"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="{{ asset('gio-hang') }}"><i class="fa fa-shopping-bag"></i> <span class="number_cart"></span></a></li>
+                <li><a href="{{ asset('gio-hang') }}"><i class="fa fa-shopping-bag"></i> <span
+                            class="number_cart"></span></a></li>
             </ul>
             {{-- <div class="header__cart__price">item: <span>$150.00</span></div> --}}
         </div>
@@ -26,25 +27,25 @@
                     $user = Auth::user()->name;
                     $my_var =
                         "<div class=\"header__top__right__language\">
-                                                        <a class=\"header__top__right\">
-                                                        <i class=\"fa-solid fa-user-check\"></i>" .
+                                                            <a class=\"header__top__right\">
+                                                            <i class=\"fa-solid fa-user-check\"></i>" .
                         $user .
                         "</a>
-                                                        <span class=\"arrow_carrot-down\"></span>
-                                                        <ul>
-                                                            <li><a href=\"http://localhost/jkshop/logout\"><i class=\"fa fa-sign-out\"></i> Đăng xuất</a></li>
-                                                        </ul>
-                                                    </div>";
+                                                            <span class=\"arrow_carrot-down\"></span>
+                                                            <ul>
+                                                                <li><a href=\"http://localhost/jkshop/logout\"><i class=\"fa fa-sign-out\"></i> Đăng xuất</a></li>
+                                                            </ul>
+                                                        </div>";
                     echo $my_var;
                 } else {
                     $my_var = "<div class=\"header__top__right__language\">
-                                                        <a class=\"header__top__right\" href=\"http://localhost/jkshop/login\" >
-                                                        <i class=\"fa-solid fa-right-to-bracket\"></i> Đăng nhập</a>
-                                                        <span class=\"arrow_carrot-down\"></span>
-                                                        <ul>
-                                                            <li><a href=\"http://localhost/jkshop/register\"><i class=\"fa-regular fa-registered\"></i> Đăng ký</a></li>
-                                                        </ul>
-                                                    </div>";
+                                                            <a class=\"header__top__right\" href=\"http://localhost/jkshop/login\" >
+                                                            <i class=\"fa-solid fa-right-to-bracket\"></i> Đăng nhập</a>
+                                                            <span class=\"arrow_carrot-down\"></span>
+                                                            <ul>
+                                                                <li><a href=\"http://localhost/jkshop/register\"><i class=\"fa-regular fa-registered\"></i> Đăng ký</a></li>
+                                                            </ul>
+                                                        </div>";
                     echo $my_var;
                 }
             @endphp
@@ -52,7 +53,7 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="{{ asset('trang-chu') }}">Trang chủ</a></li>
-                <li><a href="{{ asset('gioi-thieu')}}">Giới thiệu</a></li>
+                <li><a href="{{ asset('gioi-thieu') }}">Giới thiệu</a></li>
                 <li><a href="{{ asset('san-pham') }}">Sản phẩm</a></li>
                 <li><a href="{{ asset('tin-tuc') }}">Tin tức</a></li>
                 <li><a href="">Liên hệ</a></li>
@@ -97,7 +98,7 @@
                                     <a href="#"><i class="fa fa-pinterest-p"></i></a>
                                 </div>
                                 <div class="header__top__right__language">
-                                    <img src="{{asset('public/img/vietnam.png')}}" alt="">
+                                    <img src="{{ asset('public/img/vietnam.png') }}" alt="">
                                     <div>Việt Nam</div>
                                     <span class="arrow_carrot-down"></span>
                                     <ul>
@@ -110,25 +111,25 @@
                                         $user_id = Auth::user()->id;
                                         $my_var =
                                             "<div class=\"header__top__right__language\">
-                                                        <a class=\"header__top__right\" href=\"http://localhost/jkshop/user/user-detail\">
-                                                        <i class=\"fa-solid fa-user-check\"></i>" .
+                                                            <a class=\"header__top__right\" href=\"http://localhost/jkshop/user/user-detail\">
+                                                            <i class=\"fa-solid fa-user-check\"></i>" .
                                             $user .
                                             "</a>
-                                                        <span class=\"arrow_carrot-down\"></span>
-                                                        <ul>
-                                                            <li><a href=\"http://localhost/jkshop/logout\"><i class=\"fa fa-sign-out\"></i> Đăng xuất</a></li>
-                                                        </ul>
-                                                    </div>";
+                                                            <span class=\"arrow_carrot-down\"></span>
+                                                            <ul>
+                                                                <li><a href=\"http://localhost/jkshop/logout\"><i class=\"fa fa-sign-out\"></i> Đăng xuất</a></li>
+                                                            </ul>
+                                                        </div>";
                                         echo $my_var;
                                     } else {
                                         $my_var = "<div class=\"header__top__right__language\">
-                                                        <a class=\"header__top__right\" href=\"http://localhost/jkshop/login\" >
-                                                        <i class=\"fa-solid fa-right-to-bracket\"></i> Đăng nhập</a>
-                                                        <span class=\"arrow_carrot-down\"></span>
-                                                        <ul>
-                                                            <li><a href=\"http://localhost/jkshop/register\"><i class=\"fa-regular fa-registered\"></i> Đăng ký</a></li>
-                                                        </ul>
-                                                    </div>";
+                                                            <a class=\"header__top__right\" href=\"http://localhost/jkshop/login\" >
+                                                            <i class=\"fa-solid fa-right-to-bracket\"></i> Đăng nhập</a>
+                                                            <span class=\"arrow_carrot-down\"></span>
+                                                            <ul>
+                                                                <li><a href=\"http://localhost/jkshop/register\"><i class=\"fa-regular fa-registered\"></i> Đăng ký</a></li>
+                                                            </ul>
+                                                        </div>";
                                         echo $my_var;
                                     }
                                 @endphp
@@ -141,7 +142,8 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="header__logo">
-                            <a href="{{ asset('/trang-chu') }}"><img style="height: 50px; width:120px; object-fit: cover;"src="{{ asset($logo->url) }}"
+                            <a href="{{ asset('/trang-chu') }}"><img
+                                    style="height: 50px; width:120px; object-fit: cover;" src="{{ asset($logo->url) }}"
                                     alt=""></a>
                         </div>
                     </div>
@@ -149,7 +151,7 @@
                         <nav class="header__menu">
                             <ul>
                                 <li class="active"><a href="{{ asset('/trang-chu') }}">Trang chủ</a></li>
-                                <li><a href="{{ asset('gioi-thieu')}}">Giới thiệu</a></li>
+                                <li><a href="{{ asset('gioi-thieu') }}">Giới thiệu</a></li>
                                 <li><a href="{{ asset('san-pham') }}">Sản phẩm</a>
                                 </li>
                                 <li><a href="{{ asset('tin-tuc') }}">Tin tức</a></li>
@@ -158,20 +160,23 @@
                         </nav>
                     </div>
                     <div class="col-lg-2">
-                    <div class="header__cart">
-                        <ul>
-                            <li><a href=""><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="{{asset('gio-hang')}}"><i class="fa fa-shopping-bag"></i> <span
-                                        class="number_cart"></span></a></li>
-                        </ul>
-                        {{-- <div class="header__cart__price">item: <span></span></div> --}}
+                        <div class="header__cart">
+                            <ul>
+                                <li><a href="{{ asset('user/favorite-product') }}"><i class="fa fa-heart"></i>
+                                        <span>
+                                            
+                                        </span></a></li>
+                                <li><a href="{{ asset('gio-hang') }}"><i class="fa fa-shopping-bag"></i> <span
+                                            class="number_cart"></span></a></li>
+                            </ul>
+                            {{-- <div class="header__cart__price">item: <span></span></div> --}}
+                        </div>
                     </div>
-                </div>
                 </div>
                 <div class="humberger__open">
                     <i class="fa fa-bars"></i>
                 </div>
-                
+
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>
@@ -182,12 +187,13 @@
 
 @push('scripts')
     <script !src="">
-        $(document).ready(function () {
+        $(document).ready(function() {
             const html = $(".number_cart");
-            const url = "{{route('cart.number')}}";
+            const url = "{{ route('cart.number') }}";
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
                 }
             });
             $.ajax({
@@ -196,11 +202,10 @@
                 type: "get",
                 async: true,
                 data: {},
-                success: function (data) {
+                success: function(data) {
                     html.html(data.number);
                 },
-                error: function (xhr, exception) {
-                }
+                error: function(xhr, exception) {}
             });
         });
     </script>

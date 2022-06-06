@@ -5,8 +5,7 @@ $.ajaxSetup({
 });
 function ajaxAddCart() {
     $('.add-cart').click(function () {
-        const url = $(this).data('url');
-        console.log(url);
+        let url = $(this).data('url');;
         $.ajax({
                 url: url,
                 dataType: "json",
@@ -15,10 +14,26 @@ function ajaxAddCart() {
                 data: {},
                 success: function (data) {
                     alert(data.message);
-                    setTimeout(
-                        function () {
-                            location.reload();
-                        }, 500);
+                    const html = $(".number_cart");
+                     url = "http://localhost/jkshop/gio-hang/number";
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                        }
+                    });
+                    $.ajax({
+                        url: url,
+                        dataType: "json",
+                        type: "get",
+                        async: true,
+                        data: {},
+                        success: function (data) {
+                            console.log(data);
+                            html.html(data.number);
+                        },
+                        error: function (xhr, exception) { }
+                    });
                 },
                 error: function (xhr, exception) {
                     console.log(exception);
@@ -28,7 +43,7 @@ function ajaxAddCart() {
     })
 }
 
-function ajaxRemoveCart() {
+function ajaxRemoveCart(url) {
     $('.icon_close').click(function () {
         const productId = $(this).data('id');
         const url = $(this).data('url');
@@ -42,10 +57,27 @@ function ajaxRemoveCart() {
                 },
                 success: function (data) {
                     alert(data.message);
-                    setTimeout(
-                        function () {
-                            location.reload();
-                        }, 500);
+                    const html = $(".number_cart");
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+                        }
+                    });
+                    $.ajax({
+                        url: url,
+                        dataType: "json",
+                        type: "get",
+                        async: true,
+                        data: {},
+                        success: function (data) {
+                            console.log(data);
+                            html.html(data.number);
+                        },
+                        error: function (xhr, exception) {
+                            console.log(exception);
+                         }
+                    });
                 },
                 error: function (xhr, exception) {
                     console.log(exception);

@@ -8,6 +8,7 @@ use App\Models\Logo;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Gallery;
+use App\Models\FavoriteProduct;
 
 class ProductViewController extends Controller
 {
@@ -17,6 +18,7 @@ class ProductViewController extends Controller
         $this->product = new Product();
         $this->gallery = new Gallery();
         $this->logos = new Logo();
+        $this->favorite = new FavoriteProduct();
     }
 
     public function viewProduct()
@@ -27,6 +29,7 @@ class ProductViewController extends Controller
         $product = $this->product->getProduct();
         $sale = $this->product->getSaleProduct();
         $logo = $this->logos->getLogo();
+        
 
         $array = [];
 
@@ -36,15 +39,15 @@ class ProductViewController extends Controller
             $price = $value->product_price - ($value->product_price * 0.1);
             $object = (object) ['product' => $value,
                                 'newprice' => $price,
-                                'slug' => $value->product_slug];
+                                'slug' => $value->product_slug,
+                                'checkFavorite' => $this->favorite->check($value->id)];
             $array[] = $object;
         }
-        
         return view('frontend.product')->with(['cate' => $cate,
                                                 'product' => $product,
                                                 'title' => $title,
                                                 'sale' => $array,
-                                                'logo' => $logo
+                                                'logo' => $logo,
                                                ]);
     }
 
@@ -54,6 +57,7 @@ class ProductViewController extends Controller
         $product_id = $result->id; // get product id
         $getGallery = $this->gallery->getGalleryByProductId($product_id);
         $logo = $this->logos->getLogo();
-        return view('frontend.product-detail', compact('result', 'getGallery', 'logo'));
+        $check = $this->favorite->check($product_id);
+        return view('frontend.product-detail', compact('result', 'getGallery', 'logo', 'check'));
     }
 }
