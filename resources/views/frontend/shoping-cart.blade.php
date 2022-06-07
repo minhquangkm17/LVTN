@@ -70,10 +70,10 @@
                                                         <input type="hidden" name="product_id[]"
                                                             value="{{ $cart->product['id'] }}">
                                                         <label>
-                                                            <input class="pro-qty" name="number[]" type="number"
+                                                            <input id="{{ $cart->product['id'] }}" class="pro-qty" name="number[]" type="number"
                                                                 value="{{ $cart['number'] }}">
                                                         </label>
-                                                        <button type="button"
+                                                        <button type="button" data-id="{{$cart->product['id']}}"
                                                             data-url="{{ route('cart.addCart', $cart->product['id']) }}"
                                                             class="add-cart"><i class="fa-solid fa-plus"></i></button>
                                                     </div>

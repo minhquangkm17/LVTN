@@ -116,7 +116,7 @@ class CartController extends Controller
                 'total' => $order['total'],
                 'name' => auth()->user()['name'],
                 'message' => $params['message'] ?? '',
-                'payment_type' => 'momo',
+                'payment_type' => 'money',
                 'payment_at' => Carbon::now()->format('y-m-d H:i:s'),
                 'amount' => $order['amount'],
             ]);

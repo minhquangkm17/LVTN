@@ -71,7 +71,7 @@ function ajaxRemoveCart(url) {
                         async: true,
                         data: {},
                         success: function (data) {
-                            console.log(data);
+                            console.log($("#" + productId).val(data.number))
                             html.html(data.number);
                         },
                         error: function (xhr, exception) {

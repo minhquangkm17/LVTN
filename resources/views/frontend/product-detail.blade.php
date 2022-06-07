@@ -54,17 +54,17 @@
                         <p>{!! $result->product_decription !!}</p>
                         <div class="product__details__quantity">
                             <div class="quantity">
-                                <div class="pro-qty">
-                                    <input type="text" value="1">
-                                </div>
+                                
+                                    <input class="btn btn-primary" type="text" value="1">
+                               
                             </div>
                         </div>
-                        <button class="add-cart" data-url="{{route('cart.addCart',$result->id)}}">
+                        <button class="btn btn-primary" class="add-cart" data-url="{{route('cart.addCart',$result->id)}}">
                             <i class="fa fa-shopping-cart"></i>
                         </button>
                         @php
                         if($check == null){
-                            echo "<a href=\"http://localhost/jkshop/user/add-favorite-product/$result->id\" class=\"heart-icon\"><i class=\"fa fa-heart\"></i></a>";
+                            echo "<a class=\"btn btn-primary\" href=\"http://localhost/jkshop/user/add-favorite-product/$result->id\" class=\"heart-icon\"><i class=\"fa fa-heart\"></i></a>";
                         }
                         if($check != null){
                             echo "<a href=\"http://localhost/jkshop/user/del-favorite-product/$result->id\" class=\"heart-icon\"><i style=\"color:red\" class=\"fa fa-heart\"></i></a>";
