@@ -147,6 +147,4 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::get('edit-img', [StaticPageController::class, 'img'])->name('editImg');
         Route::post('post-logo', [StaticPageController::class, 'postEditLogo'])->name('postEditLogo');
     });
-
-
 });

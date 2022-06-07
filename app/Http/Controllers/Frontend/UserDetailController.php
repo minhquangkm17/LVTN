@@ -23,7 +23,13 @@ class UserDetailController extends Controller
     public function userDetail()
     {
         $logo = $this->logos->getLogo();
-        return view('frontend.user.user-detail', compact('logo'));
+        $list = $this->favorite->getFavoriteProduct();
+        $number = 0;
+        foreach ($list as $key => $value) 
+        {
+            $number ++;
+        }    
+        return view('frontend.user.user-detail', compact('logo', 'number'));
     }
 
     public function editUserDetail (Request $request, $userInfo)
@@ -60,7 +66,12 @@ class UserDetailController extends Controller
     {
         $logo = $this->logos->getLogo();
         $list = $this->favorite->getFavoriteProduct();
-        return view('frontend.user.favorite-product', compact('logo', 'list'));
+        $number = 0;
+        foreach ($list as $key => $value) 
+        {
+            $number ++;
+        }    
+        return view('frontend.user.favorite-product', compact('logo', 'list', 'number'));
     }
 
     public function addFavoriteProduct(Request $request, $productInfo)

@@ -7,7 +7,7 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="{{ asset('sp-yeu-thich') }}"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                <li><a href="{{ asset('user.favoriteProduct')}}"><i class="fa fa-heart"></i> <span>{{$number}}</span></a></li>
                 <li><a href="{{ asset('gio-hang') }}"><i class="fa fa-shopping-bag"></i> <span
                             class="number_cart"></span></a></li>
             </ul>
@@ -163,9 +163,7 @@
                         <div class="header__cart">
                             <ul>
                                 <li><a href="{{ asset('user/favorite-product') }}"><i class="fa fa-heart"></i>
-                                        <span>
-                                            
-                                        </span></a></li>
+                                        <span>{{$number}}</span></a></li>
                                 <li><a href="{{ asset('gio-hang') }}"><i class="fa fa-shopping-bag"></i> <span
                                             class="number_cart"></span></a></li>
                             </ul>

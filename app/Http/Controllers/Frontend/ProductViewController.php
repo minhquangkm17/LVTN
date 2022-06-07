@@ -19,6 +19,7 @@ class ProductViewController extends Controller
         $this->gallery = new Gallery();
         $this->logos = new Logo();
         $this->favorite = new FavoriteProduct();
+        
     }
 
     public function viewProduct()
@@ -29,6 +30,12 @@ class ProductViewController extends Controller
         $product = $this->product->getProduct();
         $sale = $this->product->getSaleProduct();
         $logo = $this->logos->getLogo();
+        $list = $this->favorite->getFavoriteProduct();
+        $number = 0;
+        foreach ($list as $key => $value) 
+        {
+            $number ++;
+        }    
         
 
         $array = [];
@@ -48,6 +55,7 @@ class ProductViewController extends Controller
                                                 'title' => $title,
                                                 'sale' => $array,
                                                 'logo' => $logo,
+                                                'number' => $number,
                                                ]);
     }
 
@@ -58,6 +66,12 @@ class ProductViewController extends Controller
         $getGallery = $this->gallery->getGalleryByProductId($product_id);
         $logo = $this->logos->getLogo();
         $check = $this->favorite->check($product_id);
-        return view('frontend.product-detail', compact('result', 'getGallery', 'logo', 'check'));
+        $list = $this->favorite->getFavoriteProduct();
+        $number = 0;
+        foreach ($list as $key => $value) 
+        {
+            $number ++;
+        }    
+        return view('frontend.product-detail', compact('result', 'getGallery', 'logo', 'check', 'number'));
     }
 }
