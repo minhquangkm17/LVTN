@@ -3,9 +3,11 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
 function ajaxAddCart() {
     $('.add-cart').click(function () {
-        let url = $(this).data('url');;
+        let url = $(this).data('url');
+        let productId = $(this).data('id');
         $.ajax({
                 url: url,
                 dataType: "json",
@@ -14,26 +16,8 @@ function ajaxAddCart() {
                 data: {},
                 success: function (data) {
                     alert(data.message);
-                    const html = $(".number_cart");
-                     url = "http://localhost/jkshop/gio-hang/number";
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-                        }
-                    });
-                    $.ajax({
-                        url: url,
-                        dataType: "json",
-                        type: "get",
-                        async: true,
-                        data: {},
-                        success: function (data) {
-                            console.log(data);
-                            html.html(data.number);
-                        },
-                        error: function (xhr, exception) { }
-                    });
+                    document.getElementById(productId).value = data.number;
+                    $('.number_cart').html(data.number);
                 },
                 error: function (xhr, exception) {
                     console.log(exception);
@@ -57,27 +41,8 @@ function ajaxRemoveCart(url) {
                 },
                 success: function (data) {
                     alert(data.message);
-                    const html = $(".number_cart");
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
-                        }
-                    });
-                    $.ajax({
-                        url: url,
-                        dataType: "json",
-                        type: "get",
-                        async: true,
-                        data: {},
-                        success: function (data) {
-                            console.log ($("#" + productId).val(data.number))
-                            html.html(data.number);
-                        },
-                        error: function (xhr, exception) {
-                            console.log(exception);
-                         }
-                    });
+                    document.getElementById(productId).value = data.number;
+                    $('.number_cart').html(data.number);
                 },
                 error: function (xhr, exception) {
                     console.log(exception);

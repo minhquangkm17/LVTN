@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PaymentHistory;
-use Illuminate\Http\Request;
-use App\Models\Logo;
-use App\Models\Product;
 use App\Models\FavoriteProduct;
 use App\Models\Infomation;
+use App\Models\Logo;
+use App\Models\Order;
+use App\Models\PaymentHistory;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 
 class PaymentHistories extends Controller
@@ -19,33 +20,29 @@ class PaymentHistories extends Controller
         $this->logos = new Logo();
         $this->infomation = new Infomation();
     }
+
     public function index(Request $request)
     {
         $info = $this->infomation->getInfomation();
         $logo = $this->logos->getLogo();
         $listPaymentHistories = (new PaymentHistory())->getList();
+        dd($listPaymentHistories);
         $listFavorite = $this->favorite->getFavoriteProduct();
         $number = 0;
-        foreach ($listFavorite as $key => $value) 
-        {
-            $number ++;
+        foreach ($listFavorite as $key => $value) {
+            $number++;
         }
         return view('frontend.user.order')->with(['listPaymentHistories' => $listPaymentHistories,
-                                                    'logo' => $logo,
-                                                    'number' => $number,
-                                                    'info' => $info]);
+            'logo' => $logo,
+            'number' => $number,
+            'info' => $info]);
     }
 
     public function detail(Request $request, PaymentHistory $paymentInfo)
     {
-        $info = $this->infomation->getInfomation();
-        $listFavorite = $this->favorite->getFavoriteProduct();
-        $number = 0;
-        foreach ($listFavorite as $key => $value) 
-        {
-            $number ++;
-        }
-        $logo = $this->logos->getLogo();
-        return view('frontend.user.order', compact('paymentInfo', 'logo', 'number', 'info'));
+        $order = $paymentInfo->order;
+        $listProduction = Order::getListProduct($order['carts']);
+        dd($listProduction);
+//        return view('frontend.user.order', compact('paymentInfo', 'logo', 'number', 'info'));
     }
 }

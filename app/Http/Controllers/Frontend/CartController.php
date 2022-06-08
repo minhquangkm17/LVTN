@@ -174,14 +174,13 @@ class CartController extends Controller
 
         $list = $this->favorite->getFavoriteProduct();
         $number = 0;
-        foreach ($list as $key => $value) 
-        {
-            $number ++;
-        }    
+        foreach ($list as $key => $value) {
+            $number++;
+        }
         return view('frontend.shoping-cart')->with(['listCart' => $listCart,
-                                                    'logo' => $logos,
-                                                    'number' => $number,
-                                                    'info' => $info]);
+            'logo' => $logos,
+            'number' => $number,
+            'info' => $info]);
     }
 
     public function addCart(Request $request, Product $productInfo)
@@ -193,7 +192,7 @@ class CartController extends Controller
             if (!empty($cartInfo)) {
                 $cartInfo->update(['number' => ($cartInfo['number']) + 1]);
             } else {
-                $cart = Cart::create([
+                $cartInfo = Cart::create([
                     'product_id' => $productInfo['id'],
                     'user_id' => auth()->id(),
                 ]);
@@ -201,6 +200,7 @@ class CartController extends Controller
             DB::commit();
             return response()->json([
                 'message' => 'Thêm sản phẩm thành công',
+                'number' => $cartInfo['number'],
             ], 200);
         } catch (Exception $exception) {
             DB::rollBack();
@@ -226,20 +226,20 @@ class CartController extends Controller
             if ($number == 1) {
                 // $cartInfo->forceDelete();
                 return response()->json([
-                'message' => 'Số lượng không thể nhỏ hơn 1',
-            ], 200);
+                    'message' => 'Số lượng không thể nhỏ hơn 1',
+                    'number' => $cartInfo['number'],
+                ], 200);
             } else {
                 $number -= 1;
-                $update = $cartInfo->update(
+                $cartInfo->update(
                     [
-                       
                         'number' => $number,
                     ]
                 );
             }
 
             DB::commit();
-            return response()->json(['message' => "Remove Successfully"], 200);
+            return response()->json(['message' => "Remove Successfully", "number" => $cartInfo['number']], 200);
         } catch (Exception $exception) {
             DB::rollBack();
             abort(500);
@@ -274,8 +274,8 @@ class CartController extends Controller
     public function delItem($cartInfor)
     {
         DB::table('carts')
-        ->where('id', $cartInfor)
-        ->delete();
+            ->where('id', $cartInfor)
+            ->delete();
         return redirect()->back();
     }
 }

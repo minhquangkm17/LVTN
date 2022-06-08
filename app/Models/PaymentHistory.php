@@ -13,6 +13,11 @@ class PaymentHistory extends Model
         'order_id', 'user_id', 'total', 'name', 'message', 'payment_type', 'payment_at', 'amount'
     ];
 
+    public function order()
+    {
+        return $this->belongsTo('App\Models\Order', 'order_id');
+    }
+
     public function getList()
     {
         return $this->where('payment_histories.user_id', auth()->id())
