@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\FavoriteProduct;
+use App\Models\Infomation;
 
 class ProductViewController extends Controller
 {
@@ -19,6 +20,7 @@ class ProductViewController extends Controller
         $this->gallery = new Gallery();
         $this->logos = new Logo();
         $this->favorite = new FavoriteProduct();
+        $this->infomation = new Infomation();
         
     }
 
@@ -26,6 +28,7 @@ class ProductViewController extends Controller
     {
         $title = 'JK Shop';
 
+        $info = $this->infomation->getInfomation();
         $cate[] = $this->category->getCategory();
         $product = $this->product->getProduct();
         $sale = $this->product->getSaleProduct();
@@ -56,11 +59,13 @@ class ProductViewController extends Controller
                                                 'sale' => $array,
                                                 'logo' => $logo,
                                                 'number' => $number,
+                                                'info' => $info,
                                                ]);
     }
 
     public function detail($slug)
     {   
+        $info = $this->infomation->getInfomation();
         $result = $this->product->getDetailProduct($slug);
         $product_id = $result->id; // get product id
         $getGallery = $this->gallery->getGalleryByProductId($product_id);
@@ -72,6 +77,6 @@ class ProductViewController extends Controller
         {
             $number ++;
         }    
-        return view('frontend.product-detail', compact('result', 'getGallery', 'logo', 'check', 'number'));
+        return view('frontend.product-detail', compact('result', 'getGallery', 'logo', 'check', 'number', 'info'));
     }
 }

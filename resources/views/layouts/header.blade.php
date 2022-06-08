@@ -68,7 +68,7 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> 1751150052@gmail.com</li>
+                <li><i class="fa fa-envelope"></i>{{$info->email}}</li>
                 <li>Miễn phí giao hàng trên toàn quốc</li>
             </ul>
         </div>
@@ -84,7 +84,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="header__top__left">
                                 <ul>
-                                    <li><i class="fa fa-envelope"></i>1751150052@gmail.com</li>
+                                    <li><i class="fa fa-envelope"></i>{{ $info->email }}</li>
                                     <li>Miễn phí giao hàng trên toàn quốc</li>
                                 </ul>
                             </div>

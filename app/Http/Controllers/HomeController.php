@@ -10,6 +10,7 @@ use App\Models\Logo;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Blog;
+use App\Models\Infomation;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,7 @@ class HomeController extends Controller
         $this->product = new Product();
         $this->logos = new Logo();
         $this->favorite = new FavoriteProduct();
+        $this->infomation = new Infomation();
 
     }
     public function home()
@@ -34,7 +36,8 @@ class HomeController extends Controller
         $cate = $this->category->getAllCategories();
         $product = $this->product->getProduct();
         $logo = $this->logos->getLogo();
-        return view('layouts.index', compact('cate', 'blog', 'product', 'logo', 'number'));
+        $info = $this->infomation->getInfomation();
+        return view('layouts.index', compact('cate', 'blog', 'product', 'logo', 'number', 'info'));
     }
 
 }

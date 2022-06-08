@@ -8,31 +8,31 @@
                                 <a href="#"><img style="height: 100px; width:120px; object-fit: cover;" src="{{ asset($logo->url) }}" alt=""></a>
                             </div>
                             <ul>
-                                <li>Address: 60-49 Road 11378 New York</li>
-                                <li>Phone: +65 11.188.888</li>
-                                <li>Email: hello@colorlib.com</li>
+                                <li>Address: {{$info->address}}</li>
+                                <li>Phone: {{$info->number_phone}}</li>
+                                <li>Email: {{$info->email}}</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                         <div class="footer__widget">
-                            <h6>Useful Links</h6>
+                            <h6>Các thông tin khác</h6>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">About Our Shop</a></li>
-                                <li><a href="#">Secure Shopping</a></li>
-                                <li><a href="#">Delivery infomation</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Our Sitemap</a></li>
+                                <li><a href="#">Giờ mở cửa: {{ $info->opentime }} AM</a></li>
+                                <li><a href="#">Giờ mở cửa: {{ $info->closetime }} PM</a></li>
+                                <li><a href="{{ asset('/gioi-thieu')}}">Về chúng tôi</a></li>
+                                <li><a href="#">Liên hệ</a></li>
+                                
                             </ul>
-                            <ul>
-                                <li><a href="#">Who We Are</a></li>
-                                <li><a href="#">Our Services</a></li>
+                            {{-- <ul>
+                                
+                                <li><a href="#">Các dịch vụ</a></li>
                                 <li><a href="#">Projects</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Liên hệ</a></li>
                                 <li><a href="#">Innovation</a></li>
+                                <li><a href="#">Bản đồ</a></li>
                                 <li><a href="#">Testimonials</a></li>
-                            </ul>
+                            </ul> --}}
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">

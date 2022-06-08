@@ -15,8 +15,9 @@ class PaymentHistory extends Model
 
     public function getList()
     {
-        return $this->where('user_id', auth()->id())
-            ->orderBy('created_at', 'desc')
+        return $this->where('payment_histories.user_id', auth()->id())
+            ->join('orders', 'payment_histories.order_id', '=', 'orders.id')
+            ->orderBy('payment_histories.created_at', 'desc')
             ->get();
     }
 }

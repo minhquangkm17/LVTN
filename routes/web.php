@@ -88,7 +88,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
     Route::get('/map', [AdminController::class, 'map'])->name('map');
 
-//category
+    //category
     Route::prefix('/category')->name('category.')->group(function () {
         Route::get('/', [CategoryController::class, 'showCategory'])->name('show'); //show category
         Route::get('/add', [CategoryController::class, 'showForm'])->name('add'); // add category
@@ -100,7 +100,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::post('postedit/{id}', [CategoryController::class, 'postEdit'])->name('postedit.'); // post edit category
     });
 
-//brand
+    //brand
     Route::prefix('brand')->name('brand.')->group(function () {
         Route::get('/', [BrandController::class, 'showBrand'])->name('show'); //show brand
         Route::get('/add', [BrandController::class, 'showForm'])->name('add'); // add brand
@@ -140,11 +140,14 @@ Route::prefix('/admin')->name('admin.')->group(function () {
         Route::post('postedit/{id}', [BlogController::class, 'postEdit'])->name('postedit.'); // post edit
     });
 
+    // static page
     Route::prefix('static-page')->name('static.')->group(function () 
     {
         Route::get('edit-intro', [StaticPageController::class, 'intro'])->name('editIntro');
         Route::post('post-edit-intro', [StaticPageController::class, 'postEditIntro'])->name('postedit');
         Route::get('edit-img', [StaticPageController::class, 'img'])->name('editImg');
         Route::post('post-logo', [StaticPageController::class, 'postEditLogo'])->name('postEditLogo');
+        Route::get('/edit-info', [StaticPageController::class, 'editInFo'])->name('editInfo');
+        Route::post('/post-edit-info', [StaticPageController::class, 'postEditInFo'])->name('postEditInFo');
     });
 });

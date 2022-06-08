@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\FavoriteProduct;
 use App\Models\UserDetail;
 use App\Models\Logo;
+use App\Models\Infomation;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,24 +19,27 @@ class UserDetailController extends Controller
         $this->users = new UserDetail();
         $this->logos = new Logo();
         $this->favorite = new FavoriteProduct();
+        $this->infomation = new Infomation();
     }
 
     public function userDetail()
     {
         $logo = $this->logos->getLogo();
         $list = $this->favorite->getFavoriteProduct();
+        $info = $this->infomation->getInfomation();
         $number = 0;
         foreach ($list as $key => $value) 
         {
             $number ++;
         }    
-        return view('frontend.user.user-detail', compact('logo', 'number'));
+        return view('frontend.user.user-detail', compact('logo', 'number', 'info'));
     }
 
     public function editUserDetail (Request $request, $userInfo)
     {
         $password = $request->password;
         $email = $this->users->getUserByUserId($userInfo)->email;
+        
         $verifyPassword = Auth::attempt(['email' => $email, 'password' => $password]);
         
         if($verifyPassword == true)
@@ -64,6 +68,7 @@ class UserDetailController extends Controller
 
     public function favoriteProduct ()
     {
+        $info = $this->infomation->getInfomation();
         $logo = $this->logos->getLogo();
         $list = $this->favorite->getFavoriteProduct();
         $number = 0;
@@ -71,7 +76,7 @@ class UserDetailController extends Controller
         {
             $number ++;
         }    
-        return view('frontend.user.favorite-product', compact('logo', 'list', 'number'));
+        return view('frontend.user.favorite-product', compact('logo', 'list', 'number', 'info'));
     }
 
     public function addFavoriteProduct(Request $request, $productInfo)

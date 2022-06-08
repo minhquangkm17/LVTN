@@ -96,6 +96,13 @@ class Product extends Model
             ->first();
     }
 
+    public function getDetailProductById($productId)
+    {
+        return $product = DB::table($this->table)
+            ->where('product_slug', $productId)
+            ->first();
+    }
+
     //get all product to frontend
     public function getProduct()
     {

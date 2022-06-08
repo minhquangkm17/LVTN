@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\PaymentHistory;
 use App\Models\FavoriteProduct;
+use App\Models\Infomation;
 use App\Models\Product;
 use App\Models\Logo;
 use Carbon\Carbon;
@@ -164,10 +165,13 @@ class CartController extends Controller
     {
         $cart = new Cart();
         $logos = new Logo();
+        $this->infomation = new Infomation();
         $this->favorite = new FavoriteProduct();
 
         $listCart = $cart->getCartByUserId(auth()->id());
         $logo = $logos->getLogo();
+        $info = $this->infomation->getInfomation();
+
         $list = $this->favorite->getFavoriteProduct();
         $number = 0;
         foreach ($list as $key => $value) 
@@ -176,7 +180,8 @@ class CartController extends Controller
         }    
         return view('frontend.shoping-cart')->with(['listCart' => $listCart,
                                                     'logo' => $logos,
-                                                    'number' => $number]);
+                                                    'number' => $number,
+                                                    'info' => $info]);
     }
 
     public function addCart(Request $request, Product $productInfo)

@@ -71,8 +71,8 @@
                                     <div class="form-group row">
                                         <label for="birthday" class="col-4 col-form-label">Ngày sinh</label>
                                         <div class="col-8">
-                                            <input id="birthday" value="{{ auth()->user()->user_detail['birthday'] }}"
-                                                name="birthday" placeholder="Ngày sinh" class="form-control here"
+                                            <input id="birthday" value="{!! auth()->user()->user_detail['birthday'] !!}"
+                                                name="birthday" class="form-control here"
                                                 type="date">
                                         </div>
                                     </div>

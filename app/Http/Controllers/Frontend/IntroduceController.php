@@ -7,22 +7,30 @@ use App\Models\Logo;
 use Illuminate\Http\Request;
 use App\Models\Introduce;
 use App\Models\FavoriteProduct;
+use App\Models\Infomation;
 
 class IntroduceController extends Controller
 {
+    public function __construct()
+    {
+        $this->infomation = new Infomation();
+        $this->favorite = new FavoriteProduct();
+        $this->introduce = new Introduce();
+        $this->logos = new Logo();
+    }
     public function introduce()
     {
-        $introduce = new Introduce();
-        $logos = new Logo();
-        $this->favorite = new FavoriteProduct();
+        
+        $info = $this->infomation->getInfomation();
+        
         $list = $this->favorite->getFavoriteProduct();
         $number = 0;
         foreach ($list as $key => $value) 
         {
             $number ++;
         }    
-        $intro = $introduce->getIntro();
-        $logo = $logos->getLogo();
-        return view('frontend.introduce', compact('logo', 'intro', 'number'));
+        $intro = $this->introduce->getIntro();
+        $logo = $this->logos->getLogo();
+        return view('frontend.introduce', compact('logo', 'intro', 'number', 'info'));
     }
 }

@@ -38,7 +38,9 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($listPaymentHistories as $key => $list)
-                                        @dd($list)
+                                        @php
+                                            
+                                        @endphp
                                             <tr>
                                                 <th scope="row">{{$key+1}}</th>
                                                 <td></td>

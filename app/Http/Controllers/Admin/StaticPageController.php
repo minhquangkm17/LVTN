@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Introduce;
 use Illuminate\Support\Facades\DB;
 use App\Models\Logo;
+use App\Models\Infomation;
 
 class StaticPageController extends Controller
 {
@@ -14,6 +15,7 @@ class StaticPageController extends Controller
     {
         $this->intro = new Introduce();
         $this->logos = new Logo();
+        $this->infomation = new Infomation();
 
     }
 
@@ -79,4 +81,25 @@ class StaticPageController extends Controller
 
         return back();
     }
+
+    public function editInfo()
+    {
+        $info = $this->infomation->getInfomation();
+        return view('admin.static-page.edit-info', compact('info'));
+    }
+
+    public function postEditInFo(Request $request)
+    {
+        $info = DB::table('infomations')
+        ->where('id', 1)
+        ->update([  'address' => $request->address,
+                    'number_phone' => $request->number_phone,
+                    'email' => $request->email,
+                    'opentime' => $request->opentime,
+                    'closetime' => $request->closetime]);
+
+        return redirect()->route('admin.static.editInfo');
+    }
+
+
 }
