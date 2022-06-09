@@ -35,7 +35,7 @@ class UserDetailController extends Controller
         return view('frontend.user.user-detail', compact('logo', 'number', 'info'));
     }
 
-    public function editUserDetail (Request $request, $userInfo)
+    public function editUserDetail (UserRequest $request, $userInfo)
     {
         $password = $request->password;
         $email = $this->users->getUserByUserId($userInfo)->email;
@@ -60,9 +60,11 @@ class UserDetailController extends Controller
                     'address' => $request->address,
                 ]);
 
+            $request->session()->put('message', 'Thành công!');
             return back();
         } else { 
-            return redirect()->route('index')->send();
+            $request->session()->put('message', 'Mật khẩu không trùng khớp!');
+            return back();
         }
     }
 

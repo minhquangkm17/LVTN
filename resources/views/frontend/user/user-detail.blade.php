@@ -7,11 +7,13 @@
         <div class="row">
             <div class="col-md-3 ">
                 <div class="list-group ">
-                     <span class="list-group-item list-group-item-action active">Dashboard</span>
-                    <a href="{{route('user.userDetail')}}" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
+                    <span class="list-group-item list-group-item-action active">Dashboard</span>
+                    <a href="{{ route('user.userDetail') }}" class="list-group-item list-group-item-action">Thông tin cá
+                        nhân</a>
                     <a href="#" class="list-group-item list-group-item-action">Đổi mật khẩu</a>
                     <a href="#" class="list-group-item list-group-item-action">Quản lý đơn hàng</a>
-                    <a href="{{ route('user.favoriteProduct')}}" class="list-group-item list-group-item-action">Sản phẩm yêu thích</a>
+                    <a href="{{ route('user.favoriteProduct') }}" class="list-group-item list-group-item-action">Sản phẩm
+                        yêu thích</a>
                 </div>
             </div>
             <div class="col-md-9">
@@ -37,13 +39,20 @@
                                     <input type="hidden" value="{{ auth()->user()->id }}">
 
                                     <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
+                                        <input type="hidden" class="col-4 col-form-label">
                                         <div class="col-8">
                                             @error('name')
                                                 <span style="color:red">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
+                                    @php
+                                        $message = Session::get('message');
+                                        if ($message) {
+                                            echo "<div class='alert alert-danger' style='text-align: center'>$message</div>";
+                                            Session::put('message', null);
+                                        }
+                                    @endphp
                                     <div class="form-group row">
                                         <label for="username" class="col-4 col-form-label">Tên người dùng*</label>
                                         <div class="col-8">
@@ -53,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
+                                        <input type="hidden" class="col-4 col-form-label">
                                         <div class="col-8">
                                             @error('full_name')
                                                 <span style="color:red">{{ $message }}</span>
@@ -71,13 +80,12 @@
                                     <div class="form-group row">
                                         <label for="birthday" class="col-4 col-form-label">Ngày sinh</label>
                                         <div class="col-8">
-                                            <input id="birthday" value="{!! auth()->user()->user_detail['birthday'] !!}"
-                                                name="birthday" class="form-control here"
-                                                type="date">
+                                            <input id="birthday" value="{!! auth()->user()->user_detail['birthday'] !!}" name="birthday"
+                                                class="form-control here" type="date">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
+                                        <input type="hidden" class="col-4 col-form-label">
                                         <div class="col-8">
                                             @error('email')
                                                 <span style="color:red">{{ $message }}</span>
@@ -89,11 +97,11 @@
                                         <div class="col-8">
                                             <input id="email" value="{{ auth()->user()->email }}" name="email"
                                                 placeholder="Email" class="form-control here" required="required"
-                                                type="text">
+                                                type="email">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
+                                        <input type="hidden" class="col-4 col-form-label">
                                         <div class="col-8">
                                             @error('number_phone')
                                                 <span style="color:red">{{ $message }}</span>
@@ -110,7 +118,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
+                                        <input type="hidden" class="col-4 col-form-label">
                                         <div class="col-8">
                                             @error('address')
                                                 <span style="color:red">{{ $message }}</span>
@@ -120,8 +128,7 @@
                                     <div class="form-group row">
                                         <label for="address" class="col-4 col-form-label">Địa chỉ*</label>
                                         <div class="col-8">
-                                            <textarea id="address" name="address" cols="40" rows="4"
-                                                class="form-control">{{ auth()->user()->user_detail['address'] }}</textarea>
+                                            <textarea id="address" name="address" cols="40" rows="4" class="form-control">{{ auth()->user()->user_detail['address'] }}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">

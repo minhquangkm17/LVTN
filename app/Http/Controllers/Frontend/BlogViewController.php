@@ -23,7 +23,7 @@ class BlogViewController extends Controller
     {
         $result[] = $this->blogs->getPost();
         $logo = $this->logos->getLogo();
-        $info = $this->infomations->getInfomation();
+        $info = $this->infomation->getInfomation();
 
         $list = $this->favorite->getFavoriteProduct();
         $number = 0;

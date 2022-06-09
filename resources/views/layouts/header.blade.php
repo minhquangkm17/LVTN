@@ -3,7 +3,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-{{--            <a href="{{ '/trang-chu' }}"><img src="{{ asset($logo->url) }}" alt=""></a>--}}
+           <a href="{{ '/trang-chu' }}"><img src="{{ asset($logo->url) }}" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -11,7 +11,6 @@
                 <li><a href="{{ asset('gio-hang') }}"><i class="fa fa-shopping-bag"></i> <span
                             class="number_cart"></span></a></li>
             </ul>
-            {{-- <div class="header__cart__price">item: <span>$150.00</span></div> --}}
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -68,7 +67,7 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-{{--                <li><i class="fa fa-envelope"></i>{{$info->email}}</li>--}}
+               <li><i class="fa fa-envelope"></i>{{$info->email}}</li>
                 <li>Miễn phí giao hàng trên toàn quốc</li>
             </ul>
         </div>
@@ -84,7 +83,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="header__top__left">
                                 <ul>
-{{--                                    <li><i class="fa fa-envelope"></i>{{ $info->email }}</li>--}}
+                                   <li><i class="fa fa-envelope"></i>{{ $info->email }}</li>
                                     <li>Miễn phí giao hàng trên toàn quốc</li>
                                 </ul>
                             </div>
@@ -143,7 +142,7 @@
                     <div class="col-lg-2">
                         <div class="header__logo">
                             <a href="{{ asset('/trang-chu') }}"><img
-{{--                                    style="height: 50px; width:120px; object-fit: cover;" src="{{ asset($logo->url) }}"--}}
+                                   style="height: 50px; width:120px; object-fit: cover;" src="{{ asset($logo->url) }}"
                                     alt=""></a>
                         </div>
                     </div>

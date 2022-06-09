@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
@@ -40,30 +41,9 @@ class ProductController extends Controller
     }
 
     // post add product
-    public function postAddProduct(Request $request)
+    public function postAddProduct(ProductRequest $request)
     {
         $this->authLogin();
-
-        // validation input data
-        $request->validate([
-            'product_name' =>'required',
-            'product_price' =>'required|integer',
-            'discount' => 'between:1,100',
-            'product_decription' =>'required',
-            'product_spec' =>'required',
-            'product_img' =>'image|required|max:10000',
-            'product_slug' => 'required',
-        ],[
-            'category_name.required' => 'Hãy nhập tên sản phẩm',
-            'product_price.required' => 'Hãy nhập giá sản phẩm',
-            'product_price.integer' => 'Giá bán phải là một số dương',
-            'product_decription.required' => 'Hãy nhập mô tả sản phẩm',
-            'product_spec.required' => 'Hãy nhập thông số sản phẩm',
-            'product_img.image' => 'Dữ liệu không phải dạng ảnh',
-            'product_img.required' => 'Hãy chèn ảnh sản phẩm',
-            'product_img.max' => 'Ảnh tối đa 10Mb',
-            'discount.between' => 'Discount phải trong khoảng 1% đến 100%'
-        ]);
 
         // custom name, url img
         $get_img = $request->file(['product_img']);
@@ -115,27 +95,9 @@ class ProductController extends Controller
         return view('admin/products/edit-product')->with(['result' => $result, 'brands' =>$brands, 'cate' => $cate]);
     }
     // post edit product
-    public function postEdit(Request $request, Product $id)
+    public function postEdit(ProductRequest $request, Product $id)
     {
         $this->authLogin();
-        $request->validate([
-            'product_name' =>'required',
-            'product_price' =>'required|integer',
-            'discount' => 'between:1,100',
-            'product_decription' =>'required',
-            'product_spec' =>'required',
-            'product_img' =>'image|required|max:10000',
-        ],[
-            'category_name.required' => 'Hãy nhập tên sản phẩm',
-            'product_price.required' => 'Hãy nhập giá sản phẩm',
-            'product_price.integer' => 'Giá bán phải là một số dương',
-            'product_decription.required' => 'Hãy nhập mô tả sản phẩm',
-            'product_spec.required' => 'Hãy nhập thông số sản phẩm',
-            'product_img.image' => 'Dữ liệu không phải dạng ảnh',
-            'product_img.required' => 'Hãy chèn ảnh sản phẩm',
-            'product_img.max' => 'Ảnh tối đa 10Mb',
-            'discount.between' => 'Discount phải trong khoảng 1% đến 100%'
-        ]);
 
         $get_img = $request->file(['product_img']);
 
