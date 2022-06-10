@@ -29,6 +29,15 @@ class UserRequest extends FormRequest
             'full_name' => 'required|max:100',
             'number_phone' =>'required',
             'address' =>'required|max:10000',
+            'password' =>'required|confirmed',
+            'password_confirmation' =>'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return[
+            'password.confirmed' =>'chưa khớp',
         ];
     }
 }

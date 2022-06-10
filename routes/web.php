@@ -76,6 +76,8 @@ Route::prefix('/user')->name('user.')->group(function () {
     Route::get('/favorite-product', [UserDetailController::class, 'favoriteProduct'])->name('favoriteProduct')->middleware(['auth']);
     Route::get('/add-favorite-product/{productInfo}', [UserDetailController::class, 'addFavoriteProduct'])->name('addFavoriteProduct')->middleware(['auth']);
     Route::get('/del-favorite-product/{productInfo}', [UserDetailController::class, 'delFavoriteProduct'])->name('delFavoriteProduct')->middleware(['auth']);
+    Route::get('/change-password', [UserDetailController::class, 'changePassword'])->name('changePassword')->middleware(['auth']);
+    Route::post('/post-change-password/{userInfo}', [UserDetailController::class, 'postChangePassword'])->name('postChangePassword')->middleware(['auth']);
 });
 
 

@@ -39,12 +39,11 @@ class UserDetailController extends Controller
     {
         $password = $request->password;
         $email = $this->users->getUserByUserId($userInfo)->email;
-        
-        $verifyPassword = Auth::attempt(['email' => $email, 'password' => $password]);
+        $verifyPassword = Auth::attempt(['email' => Auth::user()->email, 'password' => $password]);
         
         if($verifyPassword == true)
         {
-            DB::table('users')
+           $user = DB::table('users')
             ->where('id', $userInfo)
             ->update([
                     'name' => $request->name,
@@ -60,9 +59,11 @@ class UserDetailController extends Controller
                     'address' => $request->address,
                 ]);
 
+            $request->session()->put('message', 'Thành công!');
             return back();
         } else { 
-            return redirect()->route('index')->send();
+            $request->session()->put('message', 'Mật khẩu không trùng khớp!');
+            return back();
         }
     }
 
@@ -95,6 +96,41 @@ class UserDetailController extends Controller
     {
         $this->favorite->delFavoriteProduct($productInfo);
         return back();
+    }
+
+    public function changePassword()
+    {
+        $logo = $this->logos->getLogo();
+        $info = $this->infomation->getInfomation();
+        $number = 0;
+        $list = $this->favorite->getFavoriteProduct();
+        foreach ($list as $key => $value) 
+        {
+            $number ++;
+        }
+        
+        return view('frontend.user.change-password', compact('logo', 'info', 'number'));
+    }
+
+    public function postChangePassword (UserRequest $request, $userInfo)
+    {
+        $password = $request->old_password;
+        $verifyPassword = Auth::attempt(['email' => Auth::user()->email, 'password' => $password]);
+        dd($verifyPassword);
+        if($verifyPassword == true)
+        {
+            DB::table('users')
+            ->where('id', $userInfo)
+            ->update([
+                    'password' => bcrypt($request->password),
+                ]);
+
+            $request->session()->put('message', 'Thành công!');
+            return back();
+        } else { 
+            $request->session()->put('message', 'Mật khẩu không trùng khớp!');
+            return back();
+        }
     }
 }
 

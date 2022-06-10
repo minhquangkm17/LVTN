@@ -7,11 +7,14 @@
         <div class="row">
             <div class="col-md-3 ">
                 <div class="list-group ">
-                    <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
-                    <a href="#" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
-                    <a href="#" class="list-group-item list-group-item-action">Đổi mật khẩu</a>
+                    <span class="list-group-item list-group-item-action active">Dashboard</span>
+                    <a href="{{ route('user.userDetail') }}" class="list-group-item list-group-item-action">Thông tin cá
+                        nhân</a>
+                    <a href="{{ route('user.changePassword') }}" class="list-group-item list-group-item-action">Đổi mật
+                        khẩu</a>
                     <a href="#" class="list-group-item list-group-item-action">Quản lý đơn hàng</a>
-                    <a href="#" class="list-group-item list-group-item-action">Sản phẩm yêu thích</a>
+                    <a href="{{ route('user.favoriteProduct') }}" class="list-group-item list-group-item-action">Sản phẩm
+                        yêu thích</a>
                 </div>
             </div>
             <div class="col-md-9">
@@ -31,58 +34,53 @@
                                 @if (session('msg'))
                                     <div class="alert alert-success">{{ session('msg') }}</div>
                                 @endif
-                                <form role="form" action="{{ URL::to('user/edit-user-detail/' . $userInfo . '') }}"
+                                <form role="form" action="{{ URL::to('user/post-change-password/' . $userInfo . '') }}"
                                     method="post" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <input type="hidden" value="{{ auth()->user()->id }}">
 
                                     <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
+                                        <input type="hidden" class="col-4 col-form-label">
                                         <div class="col-8">
-                                            @error('name')
+                                            @error('old_password')
+                                                <span style="color:red">{{ $message }}</span>
+                                            @enderror
+                                            @error('password')
+                                                <span style="color:red">{{ $message }}</span>
+                                            @enderror
+                                            @error('password_confirmation')
                                                 <span style="color:red">{{ $message }}</span>
                                             @enderror
                                         </div>
                                     </div>
+                                    @php
+                                        $message = Session::get('message');
+                                        if ($message) {
+                                            echo "<div class='alert alert-danger' style='text-align: center'>$message</div>";
+                                            Session::put('message', null);
+                                        }
+                                    @endphp
                                     <div class="form-group row">
-                                        <label for="username" class="col-4 col-form-label">Tên người dùng*</label>
+                                        <label for="old_password" class="col-4 col-form-label">Mật khẩu cũ*</label>
                                         <div class="col-8">
-                                            <input id="name" value="{{ auth()->user()->name }}" name="name"
-                                                placeholder="Tên người dùng" class="form-control here" required="required"
-                                                type="text">
+                                            <input id="old_password" value="" name="old_password" placeholder="Mật khẩu cũ"
+                                                class="form-control here" required="required" type="password">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
+                                        <label for="password" class="col-4 col-form-label">Mật khẩu mới</label>
                                         <div class="col-8">
-                                            @error('full_name')
-                                                <span style="color:red">{{ $message }}</span>
-                                            @enderror
+                                            <input id="password" value="" name="password" placeholder="Mật khẩu mới"
+                                                class="form-control here" type="password">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="name" class="col-4 col-form-label">Họ và tên</label>
+                                        <label for="password_confirmation" class="col-4 col-form-label">Nhập lại mật
+                                            khẩu*</label>
                                         <div class="col-8">
-                                            <input id="full_name" value="{{ auth()->user()->user_detail['full_name'] }}"
-                                                name="full_name" placeholder="Họ và tên" class="form-control here"
-                                                type="text">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group row">
-                                        <input type="hidden"class="col-4 col-form-label">
-                                        <div class="col-8">
-                                            @error('email')
-                                                <span style="color:red">{{ $message }}</span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="email" class="col-4 col-form-label">Email*</label>
-                                        <div class="col-8">
-                                            <input id="email" value="{{ auth()->user()->email }}" name="email"
-                                                placeholder="Email" class="form-control here" required="required"
-                                                type="text">
+                                            <input id="password_confirmation" value="" name="password_confirmation"
+                                                placeholder="Nhập lại mật khẩu" class="form-control here"
+                                                required="required" type="password">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -102,4 +100,17 @@
             </div>
         </div>
     </div>
+    <script>
+        function validate() {
+            var n1 = document.getElementById("new_password1");
+            var n2 = document.getElementById("new_password2");
+            if (n1.value != "" && n2.value != "") {
+                if (n1.value == n2.value) {
+                    return true;
+                }
+            }
+            alert("Dư liệu không được để trống, không được giống nhau");
+            return false;
+        }
+    </script>
 @endsection
